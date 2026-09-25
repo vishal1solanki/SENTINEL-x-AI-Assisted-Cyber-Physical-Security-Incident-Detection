@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SENTINEL-X // Enterprise Presentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #070b14; color: #e2e8f0; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .slide-card { background: #0c1222; border: 1px solid #1e293b; border-radius: 1rem; overflow: hidden; }
+  </style>
+</head>
+<body class="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
+  <!-- Header Bar -->
+  <div class="flex flex-wrap items-center justify-between gap-4 p-5 bg-[#0f172a] rounded-2xl border border-cyan-500/30 shadow-2xl">
+    <div>
+      <div class="flex items-center gap-3">
+        <span class="px-2.5 py-1 rounded bg-cyan-950 text-cyan-400 font-mono text-xs font-bold border border-cyan-800">
+          SENTINEL-X PRESENTATION SUITE
+        </span>
+        <span class="text-xs text-slate-400 font-mono">10 Slide Standardized Deck</span>
+      </div>
+      <h1 class="text-2xl font-bold font-mono text-white mt-1">
+        SENTINEL<span class="text-cyan-400">-X</span> // PROJECT SLIDE DECK
+      </h1>
+      <p class="text-xs text-slate-400 mt-0.5">
+        PowerPoint File: <code class="text-cyan-300">C:\Users\visha\Desktop\SENTINEL_X_Project_Presentation.pptx</code>
+      </p>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="SENTINEL_X_Project_Presentation.pptx" download class="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-bold font-mono text-xs rounded-xl shadow-lg transition">
+        DOWNLOAD .PPTX
+      </a>
+      <a href="http://localhost:5173/dashboard" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white font-mono text-xs font-bold rounded-xl border border-slate-700 transition">
+        OPEN LIVE SOC BOARD →
+      </a>
+    </div>
+  </div>
+
+  <!-- Slide 1 -->
+  <div class="slide-card p-6 md:p-8 space-y-4">
+    <div class="flex justify-between items-center text-xs font-mono text-cyan-400">
+      <span>SLIDE 01 // TITLE & EXECUTIVE SUMMARY</span>
+      <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">01 / 10</span>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+      <div class="space-y-4">
+        <span class="text-xs font-mono text-cyan-400 font-bold tracking-widest uppercase">ENTERPRISE ZERO-TRUST ACCESS CONTROL</span>
+        <h2 class="text-4xl font-extrabold font-mono text-white">SENTINEL-X</h2>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Autonomous Cyber-Physical Perimeter Security, Biometric Multi-Factor Correlation & Dynamic Sensor Trust Architecture.
+        </p>
+        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2 text-xs font-mono">
+          <div class="text-cyan-400 font-bold">CORE CAPABILITIES:</div>
+          <div class="text-slate-300">• Wokwi ESP32 Virtual Edge Node (GPIO 14, 27, 25, 33, 18, 19, 21, 13)</div>
+          <div class="text-slate-300">• Interactive WebGL 3D Server Room Digital Twin (Three.js)</div>
+          <div class="text-slate-300">• Automated n8n SOAR Pipeline & Telegram Mobile Bot Alerts (@VIsahhal_bot)</div>
+          <div class="text-slate-300">• Multi-Factor Biometrics: RFID + Ocular Iris Scan</div>
+        </div>
+      </div>
+      <div>
+        <img src="presentation_assets/01_soc_dashboard.png" class="rounded-xl border border-slate-800 shadow-2xl w-full" alt="SOC Dashboard">
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide-card p-6 md:p-8 space-y-4">
+    <div class="flex justify-between items-center text-xs font-mono text-cyan-400">
+      <span>SLIDE 02 // PROBLEM STATEMENT & THREAT LANDSCAPE</span>
+      <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">02 / 10</span>
+    </div>
+    <h2 class="text-2xl font-bold font-mono text-white">The Critical Flaw in Legacy Physical Access Control</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="p-5 rounded-xl bg-slate-900 border border-amber-500/50 space-y-2">
+        <div class="text-xs font-mono text-amber-400 font-bold">1. RFID BADGE CLONING</div>
+        <p class="text-xs text-slate-300">Mifare Classic 13.56MHz cards are trivially cloned in seconds with cheap handheld tools (Flipper Zero, Proxmark). Static readers only inspect card numbers.</p>
+      </div>
+      <div class="p-5 rounded-xl bg-slate-900 border border-rose-500/50 space-y-2">
+        <div class="text-xs font-mono text-rose-400 font-bold">2. IDENTITY ASSUMPTION TRAP</div>
+        <p class="text-xs text-slate-300">Legacy systems falsely assume whoever holds the badge IS the authorized human. Stolen badges grant frictionless physical entry without raising any alarm.</p>
+      </div>
+      <div class="p-5 rounded-xl bg-slate-900 border border-cyan-500/50 space-y-2">
+        <div class="text-xs font-mono text-cyan-400 font-bold">3. SENSOR TAMPERING BLINDSPOTS</div>
+        <p class="text-xs text-slate-300">Intruders manipulate PIR motion sensors and magnetic reed switches using packet jitter and synthetic heartbeats. SOCs lack cyber-physical correlation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide-card p-6 md:p-8 space-y-4">
+    <div class="flex justify-between items-center text-xs font-mono text-cyan-400">
+      <span>SLIDE 03 // ARCHITECTURE & DATA PIPELINE</span>
+      <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">03 / 10</span>
+    </div>
+    <h2 class="text-2xl font-bold font-mono text-white">Unified Cyber-Physical Security Architecture</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+      <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-3 text-xs font-mono">
+        <div class="text-cyan-400 font-bold">END-TO-END EVENT FLOW:</div>
+        <div class="p-3 bg-black/60 rounded border border-slate-800 space-y-1.5 text-slate-300">
+          <div><strong class="text-emerald-400">1. Edge IoT:</strong> ESP32 captures RFID swipe & Iris scan</div>
+          <div><strong class="text-cyan-400">2. Ingestion:</strong> FastAPI validates standardized telemetry schema</div>
+          <div><strong class="text-blue-400">3. Correlation:</strong> 90s spatial window matches cyber & physical signals</div>
+          <div><strong class="text-amber-400">4. Decision:</strong> Validates multi-factor biometric match</div>
+          <div><strong class="text-rose-400">5. SOAR & Push:</strong> n8n triggers Telegram alerts & WebSocket updates SOC</div>
+        </div>
+        <p class="text-slate-400 text-xs">Zero-Lag Synchronization: Wokwi, 3D Twin, Attacker Portal, and SOC Board use the exact same event model.</p>
+      </div>
+      <div>
+        <img src="presentation_assets/04_simulator_page.png" class="rounded-xl border border-slate-800 shadow-2xl w-full" alt="Simulator Page">
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide-card p-6 md:p-8 space-y-4">
+    <div class="flex justify-between items-center text-xs font-mono text-cyan-400">
+      <span>SLIDE 04 // VIRTUAL HARDWARE SIMULATION (WOKWI)</span>
+      <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">04 / 10</span>
+    </div>
+    <h2 class="text-2xl font-bold font-mono text-white">ESP32 Virtual Edge Hardware Simulation (Wokwi)</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+      <div>
+        <img src="presentation_assets/07_hardware_simulation_wokwi.png" class="rounded-xl border border-slate-800 shadow-2xl w-full" alt="Wokwi Hardware">
+      </div>
+      <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-3 text-xs font-mono">
+        <div class="text-cyan-400 font-bold">EDGE CONTROLLER SPECIFICATIONS:</div>
+        <div class="space-y-1.5 text-slate-300">
+          <div>• <strong class="text-white">Microcontroller:</strong> ESP32-WROOM-32 (115200 Baud)</div>
+          <div>• <strong class="text-emerald-400">Pin 14:</strong> Authorized RFID (Dr. V. Solanki)</div>
+          <div>• <strong class="text-amber-400">Pin 27:</strong> Cloned RFID UID (0xE20045A1)</div>
+          <div>• <strong class="text-cyan-400">Pin 25:</strong> Authorized Iris Ocular Scan</div>
+          <div>• <strong class="text-purple-400">Pin 33:</strong> Wrong/Mismatched Iris Scan</div>
+          <div>• <strong class="text-emerald-400">Pin 18:</strong> Solenoid Door Unlock LED (85° Open)</div>
+          <div>• <strong class="text-rose-400">Pin 19:</strong> Dual Alarm Strobe Flashers</div>
+          <div>• <strong class="text-yellow-400">Pin 21:</strong> Security Audio Siren Buzzer</div>
+        </div>
+        <div class="p-2 rounded bg-black/50 border border-cyan-800/60 text-cyan-300 text-[11px]">
+          Dual Triggering: Virtual physical pushbuttons or Serial commands (<code>test1</code>, <code>test2</code>, <code>test3</code>).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5 -->
+  <div class="slide-card p-6 md:p-8 space-y-4">
+    <div class="flex justify-between items-center text-xs font-mono text-cyan-400">
+      <span>SLIDE 05 // CORE SECURITY LOGIC & 3 TEST FLOWS</span>
+      <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">05 / 10</span>
+    </div>
+    <h2 class="text-2xl font-bold font-mono text-white">Standardized Security Logic: The 3 Canonical Flows</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="p-5 rounded-xl bg-slate-900 border border-emerald-500/50 space-y-3">
+        <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-mono text-[10px] font-bold border border-emerald-800">TEST 1: PASS</span>
+        <div class="font-bold text-white text-sm">Authorized Access</div>
+        <p class="text-xs text-slate-300">Authorized RFID + Authorized Iris</p>
+        <div class="p-2 rounded bg-black/60 font-mono text-[10px] text-emerald-300">
+          RFID VERIFIED IRIS VERIFIED ACCESS GRANTED DOOR UNLOCK DOOR OPEN
+        </div>
+        <div class="text-[11px] text-slate-400 space-y-1">
+          <div>• Door: Unlocked & Open (85°)</div>
+          <div>• Sirens: OFF</div>
+          <div>• SOC: Normal (No incident)</div>
+        </div>
+      </div>
+
+      <div class="p-5 rounded-xl bg-slate-900 border border-amber-500/50 space-y-3">
+        <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-400 font-mono text-[10px] font-bold border border-amber-800">TEST 2: CLONED RFID</span>
+        <div class="font-bold text-white text-sm">Cloned Badge Attack</div>
+        <p class="text-xs text-slate-300">Cloned UID 0xE20045A1</p>
+        <div class="p-2 rounded bg-black/60 font-mono text-[10px] text-amber-300">
+          CLONED RFID ACCESS DENIED DOOR LOCKED ALARM ON
+        </div>
+        <div class="text-[11px] text-slate-400 space-y-1">
+          <div>• Door: STRICTLY LOCKED (0°)</div>
+          <div>• Sirens: ACTIVE (Dual Strobes)</div>
+          <div>• SOC: Incident INC-2026-001 (HIGH)</div>
+          <div>• Telegram: Alert Dispatched</div>
+        </div>
+      </div>
+
+      <div class="p-5 rounded-xl bg-slate-900 border border-rose-500/50 space-y-3">
+        <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-400 font-mono text-[10px] font-bold border border-rose-800">TEST 3: STOLEN RFID</span>
+        <div class="font-bold text-white text-sm">Iris Biometric Mismatch</div>
+        <p class="text-xs text-slate-300">Valid RFID + Unknown Human Iris</p>
+        <div class="p-2 rounded bg-black/60 font-mono text-[10px] text-rose-300">
+          RFID VERIFIED IRIS MISMATCH ACCESS DENIED DOOR LOCKED ALARM ON
+        </div>
+        <div class="text-[11px] text-slate-400 space-y-1">
+          <div>• Finding: "Possible stolen credential"</div>
+          <div>• Door: STRICTLY LOCKED (0°)</div>
+          <div>• Sirens: ACTIVE (Dual Strobes)</div>
+          <div>• SOC: Critical Incident (CRITICAL)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6 -->
+  <div class="slide-card p-6 md:p-8 space-y-4">
+    <div class="flex justify-between items-center text-xs font-mono text-cyan-400">
+      <span>SLIDE 06 // 3D DIGITAL TWIN & REAL-TIME VISUALIZATION</span>
+      <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">06 / 10</span>
+    </div>
+    <h2 class="text-2xl font-bold font-mono text-white">Real-Time 3D Server Room Digital Twin (Three.js)</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+      <div>
+        <img src="presentation_assets/02_3d_server_room.png" class="rounded-xl border border-slate-800 shadow-2xl w-full" alt="3D Server Room">
+      </div>
+      <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-3 text-xs font-mono">
+        <div class="text-cyan-400 font-bold">PHYSICAL SIMULATION DYNAMICS:</div>
+        <div class="space-y-2 text-slate-300">
+          <div>• <strong class="text-white">Strict Door Interlock:</strong> Door smoothly swings open to 85° ONLY on Test 1. Firmly locked at 0° on Test 2 & 3.</div>
+          <div>• <strong class="text-cyan-400">Biometric Iris Scanner Mesh:</strong> Optical lens with active scanning laser cone (Green on match, fierce Red on fraud).</div>
+          <div>• <strong class="text-rose-400">Dual Emergency Sirens:</strong> Interior ceiling beacon + exterior doorway strobe flash pulsing red light across room during alarm.</div>
+          <div>• <strong class="text-emerald-400">Animated Personnel Avatar:</strong> Rigged 3D avatar approaches reader, swipes card, scans iris, and reacts.</div>
+          <div>• <strong class="text-blue-400">Real-Time HUD Strip:</strong> Live telemetry overlay displaying status of RFID, Iris, Door, and Alarm.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7 -->
+  <div class="slide-card p-6 md:p-8 space-y-4">
+    <div class="flex justify-between items-center text-xs font-mono text-cyan-400">
+      <span>SLIDE 07 // DUAL PORTAL PARADIGM: ATTACKER VS DEFENDER</span>
+      <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">07 / 10</span>
+    </div>
+    <h2 class="text-2xl font-bold font-mono text-white">Strict Portal Separation: Red Team vs Defender SOC</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+      <div>
+        <img src="presentation_assets/03_attacker_portal.png" class="rounded-xl border border-slate-800 shadow-2xl w-full" alt="Attacker Portal">
+      </div>
+      <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-3 text-xs font-mono">
+        <div class="text-rose-400 font-bold">RED TEAM CONSOLE (/attacker):</div>
+        <div class="space-y-1 text-slate-300">
+          <div>• Dedicated red-team aesthetic (#070204, crimson borders).</div>
+          <div>• Streamlined to ONLY the 3 canonical test flows.</div>
+          <div>• 1-Click test execution buttons & CLI terminal ($ test1, test2, test3).</div>
+          <div>• Embedded 3D Digital Twin for real-time exploit feedback.</div>
+        </div>
+        <div class="text-cyan-400 font-bold pt-2">DEFENDER SOC BOARD (/dashboard):</div>
+        <div class="space-y-1 text-slate-300">
+          <div>• Pure monitoring operations — ALL attack trigger buttons stripped out.</div>
+          <div>• Live Correlated Event Stream over WebSockets.</div>
+          <div>• Automatically ingests incidents without manual operator entry.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 8 -->
+  <div class="slide-card p-6 md:p-8 space-y-4">
+    <div class="flex justify-between items-center text-xs font-mono text-cyan-400">
+      <span>SLIDE 08 // AUTONOMOUS SOAR & TELEGRAM MOBILE PIPELINE</span>
+      <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">08 / 10</span>
+    </div>
+    <h2 class="text-2xl font-bold font-mono text-white">Autonomous SOAR Orchestration & Telegram Mobile Alerts</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+      <div>
+        <img src="presentation_assets/08_telegram_n8n_soar.png" class="rounded-xl border border-slate-800 shadow-2xl w-full" alt="SOAR & Telegram">
+      </div>
+      <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-3 text-xs font-mono">
+        <div class="text-blue-400 font-bold">SOAR ORCHESTRATION ARCHITECTURE:</div>
+        <div class="space-y-2 text-slate-300">
+          <div>• <strong class="text-white">n8n Pipeline (Port 5678):</strong> Ingests events asynchronously at <code>/webhook/sentinel-event</code>.</div>
+          <div>• <strong class="text-amber-400">Severity Router:</strong> High & Critical events trigger instant security advisories.</div>
+          <div>• <strong class="text-cyan-400">Mobile Bot (@VIsahhal_bot):</strong> Delivers live HTML security alerts to mobile phone in &lt; 1 second.</div>
+          <div>• <strong class="text-emerald-400">Payload Transparency:</strong> Includes Incident Title, Tracking ID, Location, and Analysis Summary.</div>
+          <div>• <strong class="text-purple-400">Simultaneous Sync:</strong> SOC board updates simultaneously over WebSockets.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 9 -->
+  <div class="slide-card p-6 md:p-8 space-y-4">
+    <div class="flex justify-between items-center text-xs font-mono text-cyan-400">
+      <span>SLIDE 09 // ZERO-TRUST SENSOR INTEGRITY & BLIND SPOTS</span>
+      <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">09 / 10</span>
+    </div>
+    <h2 class="text-2xl font-bold font-mono text-white">Dynamic Sensor Trust Engine & Blind Spot Analytics</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+      <div>
+        <img src="presentation_assets/06_sensor_trust.png" class="rounded-xl border border-slate-800 shadow-2xl w-full" alt="Sensor Trust">
+      </div>
+      <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-3 text-xs font-mono">
+        <div class="text-cyan-400 font-bold">SENSOR INTEGRITY EVALUATION:</div>
+        <div class="space-y-2 text-slate-300">
+          <div>• <strong class="text-emerald-400">Dynamic Trust Score (0–100%):</strong> Tracks signal jitter, pulse frequency anomalies, and synthetic injection.</div>
+          <div>• <strong class="text-rose-400">Inconsistency Engine:</strong> Identifies physically impossible sequences (e.g. motion inside room with closed door).</div>
+          <div>• <strong class="text-amber-400">Blind Spot Calculation:</strong> Recomputes room security coverage when sensors drop offline or lose trust.</div>
+          <div>• <strong class="text-blue-400">Autonomous Quarantine:</strong> Isolates compromised edge bridges to prevent lateral compromise.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 10 -->
+  <div class="slide-card p-6 md:p-8 space-y-4">
+    <div class="flex justify-between items-center text-xs font-mono text-cyan-400">
+      <span>SLIDE 10 // CONCLUSION & PROJECT IMPACT</span>
+      <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">10 / 10</span>
+    </div>
+    <h2 class="text-2xl font-bold font-mono text-white">Summary of Innovations & Presentation Wrap-Up</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-5 rounded-xl bg-slate-900 border border-emerald-500/50 space-y-3 text-xs font-mono">
+        <div class="text-emerald-400 font-bold">CORE INNOVATIONS:</div>
+        <div class="space-y-2 text-slate-300">
+          <div>1. <strong class="text-white">Multi-Factor Physical Defense:</strong> Eliminates RFID-only single point of failure via required iris biometrics.</div>
+          <div>2. <strong class="text-white">"Possible Stolen Credential" Principle:</strong> Grounded probabilistic reasoning rather than false identity assumptions.</div>
+          <div>3. <strong class="text-white">Synchronized 3D Digital Twin:</strong> High-fidelity WebGL simulation matching edge hardware kinematics.</div>
+          <div>4. <strong class="text-white">Autonomous SOAR:</strong> Sub-second containment and mobile Telegram notifications.</div>
+        </div>
+      </div>
+
+      <div class="p-5 rounded-xl bg-slate-900 border border-cyan-500/50 space-y-3 text-xs font-mono">
+        <div class="text-cyan-400 font-bold">DEPLOYMENT & REPOSITORY STATUS:</div>
+        <div class="space-y-1.5 text-slate-300">
+          <div>• <strong class="text-white">SOC Board:</strong> http://localhost:5173/dashboard</div>
+          <div>• <strong class="text-white">Attacker Site:</strong> http://localhost:5173/attacker</div>
+          <div>• <strong class="text-white">Backend API:</strong> http://localhost:8000/docs</div>
+          <div>• <strong class="text-white">Wokwi Firmware:</strong> wokwi/sketch.ino & diagram.json</div>
+          <div>• <strong class="text-white">Docker:</strong> 3/3 Containers Active & 100% Verified</div>
+          <div>• <strong class="text-emerald-400">Overall Status:</strong> READY FOR LIVE DEMONSTRATION!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

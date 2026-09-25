@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "author": "SENTINEL-X Team",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-pir-motion-sensor",
+      "id": "pir1",
+      "top": -140,
+      "left": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_rfid_auth",
+      "top": 80,
+      "left": -160,
+      "attrs": { "color": "green", "label": "RFID Auth" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_rfid_cloned",
+      "top": 160,
+      "left": -160,
+      "attrs": { "color": "orange", "label": "RFID Cloned" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_iris_auth",
+      "top": 240,
+      "left": -160,
+      "attrs": { "color": "cyan", "label": "Iris Auth" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_iris_wrong",
+      "top": 320,
+      "left": -160,
+      "attrs": { "color": "purple", "label": "Iris Wrong" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_green",
+      "top": 100,
+      "left": 220,
+      "attrs": { "color": "green", "label": "Access / Door" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_red",
+      "top": 170,
+      "left": 220,
+      "attrs": { "color": "red", "label": "Alarm Siren" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "buzzer1",
+      "top": 250,
+      "left": 220,
+      "attrs": { "hasLocalSound": "true" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:GND.1", "pir1:GND", "black", [ "v0" ] ],
+    [ "esp:5V", "pir1:VCC", "red", [ "v0" ] ],
+    [ "esp:13", "pir1:OUT", "purple", [ "v0" ] ],
+    [ "esp:GND.1", "btn_rfid_auth:1.l", "black", [ "v0" ] ],
+    [ "esp:14", "btn_rfid_auth:2.r", "green", [ "v0" ] ],
+    [ "esp:GND.1", "btn_rfid_cloned:1.l", "black", [ "v0" ] ],
+    [ "esp:27", "btn_rfid_cloned:2.r", "orange", [ "v0" ] ],
+    [ "esp:GND.1", "btn_iris_auth:1.l", "black", [ "v0" ] ],
+    [ "esp:25", "btn_iris_auth:2.r", "cyan", [ "v0" ] ],
+    [ "esp:GND.1", "btn_iris_wrong:1.l", "black", [ "v0" ] ],
+    [ "esp:33", "btn_iris_wrong:2.r", "purple", [ "v0" ] ],
+    [ "esp:18", "led_green:A", "green", [ "v0" ] ],
+    [ "esp:GND.2", "led_green:C", "black", [ "v0" ] ],
+    [ "esp:19", "led_red:A", "red", [ "v0" ] ],
+    [ "esp:GND.2", "led_red:C", "black", [ "v0" ] ],
+    [ "esp:21", "buzzer1:2", "yellow", [ "v0" ] ],
+    [ "esp:GND.2", "buzzer1:1", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}

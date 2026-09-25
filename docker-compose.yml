@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sentinel-x-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./sentinel_x.db
+      - FRONTEND_URL=http://localhost:5173
+      - JWT_SECRET=sentinel-x-super-secret-jwt-key-change-in-production-min32bytes
+      - DEMO_MODE=true
+      - AI_PROVIDER=openai
+      - AI_API_KEY=${AI_API_KEY:-}
+      - AI_MODEL=${AI_MODEL:-gpt-4o-mini}
+      - N8N_URL=http://n8n:5678
+      - N8N_WEBHOOK_URL=http://n8n:5678/webhook/sentinel-event
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-8950664692:AAGQrU8qYDztonRz6-HBV6fpnYI9M_mGxwo}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-5288037578}
+    volumes:
+      - backend_data:/app/data
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: sentinel-x-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: sentinel-x-n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=false
+      - WEBHOOK_URL=http://localhost:5678/
+      - GENERIC_TIMEZONE=UTC
+      - BACKEND_URL=http://backend:8000
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-8950664692:AAGQrU8qYDztonRz6-HBV6fpnYI9M_mGxwo}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-5288037578}
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./n8n/sentinel-x-workflow.json:/home/node/sentinel-x-workflow.json:ro
+    restart: unless-stopped
+
+volumes:
+  backend_data:
+  n8n_data:

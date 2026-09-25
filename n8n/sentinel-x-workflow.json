@@ -1,0 +1,211 @@
+{
+  "id": "sentinelx01",
+  "name": "SENTINEL-X Cyber-Physical Security Orchestration Pipeline",
+  "versionId": "1",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "sentinel-event",
+        "options": {}
+      },
+      "name": "Webhook Ingestion",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        180,
+        300
+      ],
+      "id": "node-webhook-01",
+      "webhookId": "sentinel-event"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Validate telemetry structure\nconst body = items[0].json.body || items[0].json;\nif (!body.event_type || !body.source_device_id) {\n  throw new Error('Invalid Sentinel-X telemetry: missing event_type or source_device_id');\n}\n\nreturn [{\n  json: {\n    event_type: body.event_type,\n    source_device_id: body.source_device_id,\n    sensor_id: body.sensor_id || null,\n    room_id: body.room_id || 'ROOM-SERVER-A',\n    severity: body.severity || 'INFO',\n    metadata: body.metadata || {},\n    ingested_at: new Date().toISOString()\n  }\n}];"
+      },
+      "name": "Validate & Normalize Telemetry",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        380,
+        300
+      ],
+      "id": "node-normalize-02"
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "={{$env.BACKEND_URL || 'http://backend:8000'}}/api/events",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={{JSON.stringify($json)}}"
+      },
+      "name": "Forward Event to Backend API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        580,
+        300
+      ],
+      "id": "node-backend-forward-03"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.severity}}",
+              "operation": "regex",
+              "value2": "HIGH|CRITICAL"
+            }
+          ]
+        }
+      },
+      "name": "IF Suspicious Severity",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        780,
+        300
+      ],
+      "id": "node-if-suspicious-04"
+    },
+    {
+      "parameters": {
+        "requestMethod": "GET",
+        "url": "={{$env.BACKEND_URL || 'http://backend:8000'}}/api/trust",
+        "options": {}
+      },
+      "name": "Query Sensor Trust Engine",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1000,
+        220
+      ],
+      "id": "node-trust-query-05"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Synthesize telemetry trust verdict and trigger advisory\nconst normNode = $node['Validate & Normalize Telemetry'];\nconst event = (normNode && normNode.json) ? normNode.json : (items[0].json || {});\nconst trustData = items[0].json || {};\nconst trustScore = typeof trustData.average_trust === 'number' ? trustData.average_trust : 85.0;\n\nreturn [{\n  json: {\n    alert_title: `CRITICAL TELEMETRY ALERT: ${event.event_type || 'INCIDENT'}`,\n    source: event.source_device_id || 'UNKNOWN_DEVICE',\n    room: event.room_id || 'ROOM-SERVER-A',\n    severity: event.severity || 'CRITICAL',\n    trust_score: trustScore,\n    recommended_response: 'SIMULATED_QUARANTINE_ISOLATION',\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "name": "Synthesize Security Advisory",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        220
+      ],
+      "id": "node-synthesis-06"
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "={{$env.BACKEND_URL || 'http://backend:8000'}}/api/responses/simulate",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={{JSON.stringify({ device_id: $json.source || 'PIR-A-01', action_type: 'QUARANTINE', reason: 'n8n Automated Quarantine Orchestration on degraded trust' })}}"
+      },
+      "name": "Trigger Simulated Quarantine",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1460,
+        180
+      ],
+      "id": "node-quarantine-07"
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "=https://api.telegram.org/bot{{$env.TELEGRAM_BOT_TOKEN || '8950664692:AAGQrU8qYDztonRz6-HBV6fpnYI9M_mGxwo'}}/sendMessage",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\n  \"chat_id\": \"{{$env.TELEGRAM_CHAT_ID || '5288037578'}}\",\n  \"text\": \"🚨 <b>[SENTINEL-X] CYBER-PHYSICAL SECURITY ALERT</b>\\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\n🎯 <b>Threat:</b> \" + $json.alert_title + \"\\n📍 <b>Location:</b> \" + $json.room + \"\\n📟 <b>Device:</b> <code>\" + $json.source + \"</code>\\n⚠️ <b>Severity:</b> <b>\" + $json.severity + \"</b>\\n📉 <b>Sensor Trust:</b> \" + $json.trust_score + \"%\\n🛡️ <b>Automated Action:</b> <code>\" + $json.recommended_response + \"</code>\\n⏱️ <b>Time:</b> \" + $json.timestamp + \"\\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\n<i>Sent automatically via SENTINEL-X n8n SOAR Pipeline</i>\",\n  \"parse_mode\": \"HTML\"\n}"
+      },
+      "name": "Send Telegram Mobile Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1460,
+        340
+      ],
+      "id": "node-telegram-alert-08"
+    }
+  ],
+  "connections": {
+    "Webhook Ingestion": {
+      "main": [
+        [
+          {
+            "node": "Validate & Normalize Telemetry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate & Normalize Telemetry": {
+      "main": [
+        [
+          {
+            "node": "Forward Event to Backend API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Forward Event to Backend API": {
+      "main": [
+        [
+          {
+            "node": "IF Suspicious Severity",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Suspicious Severity": {
+      "main": [
+        [
+          {
+            "node": "Query Sensor Trust Engine",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Sensor Trust Engine": {
+      "main": [
+        [
+          {
+            "node": "Synthesize Security Advisory",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synthesize Security Advisory": {
+      "main": [
+        [
+          {
+            "node": "Trigger Simulated Quarantine",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Telegram Mobile Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {}
+}
