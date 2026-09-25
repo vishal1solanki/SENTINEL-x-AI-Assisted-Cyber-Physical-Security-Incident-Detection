@@ -1,1 +1,0 @@
-# SENTINEL-x-AI-Assisted-Cyber-Physical-Security-Incident-Detection
